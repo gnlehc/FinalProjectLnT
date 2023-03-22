@@ -21,7 +21,10 @@ class SessionCtrl extends Controller
     public function indexLogin(){
         return view('login');
     }
-
+    
+    public function indexUser(){
+        return view('user');
+    }
     function login(Request $request){
         Session::flash('Email', $request->Email);
         $request->validate([
@@ -39,7 +42,7 @@ class SessionCtrl extends Controller
         ];
 
         if(Auth::attempt($infoLogin)){
-            return redirect('dashboard')->with("Welcome");
+            return redirect('user')->with("Welcome");
         }else{
             return redirect('login')->withErrors('Email or Password does not valid');
         }
@@ -79,7 +82,7 @@ class SessionCtrl extends Controller
             'password' => $request->password
         ];
         if(Auth::attempt($infoLogin)){
-            return redirect('dashboard')->with("Welcome", Auth::user()-> Name);
+            return redirect('login')->with("Welcome", Auth::user()-> Name);
         }else{
             return redirect('register')->withErrors('Email or Password does not valid');
         }
@@ -101,10 +104,10 @@ class SessionCtrl extends Controller
             'Pass' => $request->Pass,
             'occupation_id' => $request->occupationName,
         ]);
-        return redirect('/user');
+        return redirect('/dashboard');
     }
     public function delete($id){
         User::destroy($id);
-            return redirect('user');
+            return redirect('dashboard');
     }
 }

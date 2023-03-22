@@ -35,7 +35,7 @@
         <div class="pay">
             <h2>Login</h2>
             <h4>Welcome Back!</h4>
-            <form action="/dashboard" method="POST">
+            <form action="/user" method="POST">
                 @csrf
             <div class="username">
                 <div class="input_box">
