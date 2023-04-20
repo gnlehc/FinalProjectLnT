@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 
 class productCtrl extends Controller
 {
+    public function userProd(){
+        return view('Product');
+    }
+    public function userCategory(){
+        // $this->authorize('isAdmin');
+        $categories = category::all();
+        return view('Product', compact('categories'));
+    }
+    public function userProducts(){
+        $products = products::all();
+        return view('Product', compact('products'));
+    }
     public function indexCategory(){
         return view('createCategory');
     }
@@ -39,7 +51,7 @@ class productCtrl extends Controller
         ]);
         return redirect('displayProduct');
     }
-    public function ShowCategory(){
+    public function showCategory(){
         // $this->authorize('isAdmin');
         $categories = category::all();
         return view('createProduct', compact('categories'));

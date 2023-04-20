@@ -44,7 +44,6 @@ nav {
     display: inline-block;
     list-style: none;
     padding: 4px 16px;
-    margin-left: 100vh;
 }
 
 .logo ul li a::after {
@@ -140,6 +139,3 @@ button{
     background-color: palevioletred;
     color: whitesmoke;
 }
-
-
-

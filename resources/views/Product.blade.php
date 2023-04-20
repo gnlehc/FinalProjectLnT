@@ -46,8 +46,6 @@
                                 <th scope="col">Total Stock</th>
                                 <th scope="col">Image Title</th>
                                 <th scope="col">Image</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,15 +64,6 @@
                                                 src="{{ asset('/storage/prodImage/' . $products->image) }}">
                                         </div>
                                     </td>
-
-                                    <td><a href="{{ route('editProd', $products->id) }}"
-                                            class="btn btn-success">Edit</a>
-                                    </td>
-                                    <form action="{{ route('deleteProd', $products->id) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <td><button class="btn btn-danger">Delete</button></td>
-                                    </form>
                                 </tr>
                             @endforeach
                     </table>

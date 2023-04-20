@@ -32,6 +32,11 @@ Route::patch('/updateData/{id}', [SessionCtrl::class, 'update'])->name('update')
 Route::get('/user', [SessionCtrl::class, 'indexUser']);
 Route::post('/user', [SessionCtrl::class, 'login']);
 
+Route::get('/user', function () {
+    $user = Auth::user();
+    return view('user', compact('user'));
+});
+
 Route::get('/account', [SessionCtrl::class, 'dual'])->middleware('isLogin');
 
 Route::get('/createCategory', [productCtrl::class, 'indexCategory']);
@@ -43,3 +48,8 @@ Route::get('/displayProduct', [productCtrl::class, 'showProducts']);
 Route::get('/editProd/{id}', [productCtrl::class, 'editProd'])->name('editProd')->middleware('isAdmin');
 Route::delete('/deleteProd/{id}', [productCtrl::class, 'deleteProd'])->name('deleteProd')->middleware('isAdmin');
 Route::patch('/updateProd/{id}', [productCtrl::class, 'updateProd'])->name('updateProd')->middleware('isAdmin');
+
+
+//
+// Route::get('/Products', [productCtrl::class, 'userProd']);
+Route::get('/Products', [productCtrl::class, 'userProducts']);

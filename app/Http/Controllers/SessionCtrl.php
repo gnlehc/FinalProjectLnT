@@ -21,7 +21,7 @@ class SessionCtrl extends Controller
     public function indexLogin(){
         return view('login');
     }
-    
+
     public function indexUser(){
         return view('user');
     }
@@ -33,12 +33,12 @@ class SessionCtrl extends Controller
         $request->validate([
             'Email' => 'required',
             'password' => 'required',
-        ], 
+        ],
         [
             'Email.required' => 'Email cannot be empty',
             'password.required' => 'Password cannot be empty',
         ]);
-        
+
         $infoLogin = [
             'Email' => $request->Email,
             'password' => $request->password
@@ -64,7 +64,7 @@ class SessionCtrl extends Controller
             'Email' => 'required|Email|unique:users',
             'TLP' => 'required',
             'password' => 'required|min:6',
-        ], 
+        ],
         [
             'Name.required' => 'Name cannot be empty',
             'Email.required' => 'Email cannot be empty',
@@ -72,7 +72,7 @@ class SessionCtrl extends Controller
             'Email.unique' => "Email are already been taken",
             'password.required' => 'Password cannot be empty',
         ]);
-        
+
         $account = [
             'Name' => $request->Name,
             'Email' => $request->Email,

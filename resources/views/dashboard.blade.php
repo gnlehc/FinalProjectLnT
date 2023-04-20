@@ -40,16 +40,16 @@
                 <tbody>
                     @csrf
                     @method('patch')
-                    @foreach($users as $users)
+                    @foreach($users as $user)
                   <tr>
-                    <td>{{$users->Name}}</td>
-                    <td>{{$users->Email}}</td>
-                    <td>{{Str::limit ($users->password, 20)}}</td>  {{-- limit the display --}}
-                    <td>{{$users->TLP}}</td>
-                    <td><a href="{{route('editData', $users->id)}}" class="btn btn-success">Edit</a></td>
+                    <td>{{$user->Name}}</td>
+                    <td>{{$user->Email}}</td>
+                    <td>{{Str::limit ($user->password, 20)}}</td>  {{-- limit the display --}}
+                    <td>{{$user->TLP}}</td>
+                    <td><a href="{{route('editData', $user->id)}}" class="btn btn-success">Edit</a></td>
                     {{-- <td><button class="btn btn-success">Edit</button></td>
                     <td><button class="btn btn-danger">Delete</button></td> --}}
-                    <form action="{{route('delete', $users->id)}}" method="POST">
+                    <form action="{{route('delete', $user->id)}}" method="POST">
                       @csrf
                       @method('delete')
                       <td><button class="btn btn-danger">Delete</button></td>
@@ -64,13 +64,13 @@
       <h1> <a href="/login" style="color: pink">Login</a> to your account</h1>
       <p class="text-white items-center text-center">Do not have an account? <a href="/register" style="color: pink">Register Here</a></p>
       @endif
-    </div>    
+    </div>
     <section class="footer">
       <div class="sm">
           <ul style="align-items: center;">
               <li><a href="https://twitter.com/bncc_binus?lang=en"><i class="fa fa-twitter" style="color: whitesmoke"></i></a></li>
               <li><a href="https://id-id.facebook.com/bina.nusantara.computer.club/"><i class="fa fa-facebook" style="color: whitesmoke"></i></a></li>
-              <li><a href="https://www.instagram.com/technoscapebncc/"><i class="fa fa-instagram" style="color: whitesmoke"></i></a></li> 
+              <li><a href="https://www.instagram.com/technoscapebncc/"><i class="fa fa-instagram" style="color: whitesmoke"></i></a></li>
           </ul>
           <p>
              Copyright © 2022 BNCC. All Rights Reserved
