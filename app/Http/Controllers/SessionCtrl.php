@@ -25,6 +25,9 @@ class SessionCtrl extends Controller
     public function indexUser(){
         return view('user');
     }
+    public function dual(){
+        return view('account');
+    }
     function login(Request $request){
         Session::flash('Email', $request->Email);
         $request->validate([
@@ -44,13 +47,13 @@ class SessionCtrl extends Controller
         if(Auth::attempt($infoLogin)){
             return redirect('user')->with("Welcome");
         }else{
-            return redirect('login')->withErrors('Email or Password does not valid');
+            return redirect('account')->withErrors('Email or Password does not valid');
         }
     }
 
     function logout(){
         Auth::logout();
-        return redirect('login')->with("See you!");
+        return redirect('account')->with("See you!");
     }
 
     function create(Request $request){
@@ -59,8 +62,8 @@ class SessionCtrl extends Controller
         $request->validate([
             'Name' => 'required',
             'Email' => 'required|Email|unique:users',
+            'TLP' => 'required',
             'password' => 'required|min:6',
-            'TLP' => 'required'
         ], 
         [
             'Name.required' => 'Name cannot be empty',
@@ -73,8 +76,8 @@ class SessionCtrl extends Controller
         $account = [
             'Name' => $request->Name,
             'Email' => $request->Email,
+            'TLP' => $request->TLP,
             'password' => Hash::make($request->password),
-            'TLP' => $request->TLP
         ];
         User::create($account);
         $infoLogin = [
@@ -82,7 +85,7 @@ class SessionCtrl extends Controller
             'password' => $request->password
         ];
         if(Auth::attempt($infoLogin)){
-            return redirect('login')->with("Welcome", Auth::user()-> Name);
+            return redirect('account')->with("Welcome", Auth::user()-> Name);
         }else{
             return redirect('register')->withErrors('Email or Password does not valid');
         }
@@ -100,9 +103,8 @@ class SessionCtrl extends Controller
         User::findOrFail($id)->update([
             'Name' => $request->Name,
             'Email' => $request->Email,
+            'TLP' => $request->TLP,
             'password' => $request->password,
-            'Pass' => $request->Pass,
-            'occupation_id' => $request->occupationName,
         ]);
         return redirect('/dashboard');
     }

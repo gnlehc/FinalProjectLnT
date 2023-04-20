@@ -4,7 +4,9 @@
     font-family: 'Poppins', sans-serif;
 }
 body{
-    background-image: linear-gradient(rgba(100, 100, 100, 0.5), rgba(100, 100, 100, 0.5)), url("../css/asset/bg.jpg");
+    background-image: linear-gradient(rgba(100, 100, 100, 0.1), 
+    rgba(100, 100, 100, 0.1)), 
+    url("../css/asset/colorpurple.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -128,9 +130,4 @@ h4{
     padding-bottom: 2vw;
     color: whitesmoke;
 }
-.carousel{
-    height: 690px;
-}
-.carousel img{
-    height: 690px;
-}
+

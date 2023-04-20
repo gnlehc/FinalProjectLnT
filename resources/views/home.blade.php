@@ -22,8 +22,7 @@
                 <ul>
                     <li>
                         <a href="/" style="color: lightpink;">Home</a>
-                        <a href="/register">Register</a>
-                        <a href="/login">Login</a>
+                        <a href="/account">Sign In</a>
                     </li>
                 </ul>
             </div>
@@ -33,7 +32,6 @@
         <h1> <b>PT. Meksiko</b></h1>
         <h2>Official</h2>
     </section>
-       
     <section class="footer">
         <div class="sm">
             <ul style="align-items: center;">
