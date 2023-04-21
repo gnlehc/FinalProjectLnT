@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\category;
 use App\Models\products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class productCtrl extends Controller
 {
@@ -49,7 +51,7 @@ class productCtrl extends Controller
             'Total' => $request->Total,
             'image' => $filename,
         ]);
-        return redirect('displayProduct');
+        return redirect('Products');
     }
     public function showCategory(){
         // $this->authorize('isAdmin');
@@ -82,4 +84,26 @@ class productCtrl extends Controller
         products::destroy($id);
             return redirect('/displayProduct');
     }
+
+    // cart
+
+    public function addcart(Request $request, $id){
+        if(Auth::id()){
+            $user = auth()->user();
+            $product = products::find($id);
+            $cart = new Cart;
+            $cart->user_id = $user->id;
+            $cart->username = $user->Name;
+            $cart->prodName = $product->prodName;
+            $cart->quantity = $request->quantity;
+            $cart->price = $product->Price;
+            $cart->save();
+            return redirect()->back();
+        }
+        // else{
+        //     return redirect('');
+        // }
+    }
 }
+
+

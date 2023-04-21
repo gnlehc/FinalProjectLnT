@@ -20,8 +20,9 @@
                     <div class="logo">
                         <ul>
                             <li>
-                                <a href="/user" style="color: lightpink;">dashboard</a>
                                 <a href="/Products">Product</a>
+                                <a href="/Cart">Cart</a>
+                                <a href="/user" style="color: lightpink;">Dashboard</a>
                                 {{-- <a href="/">Category</a>
                                 <a href="/payment">Payment</a> --}}
                                 <button type="button" onclick="location.href='{{ route('logout') }}'">LogOut</button>

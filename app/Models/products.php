@@ -16,8 +16,6 @@ class products extends Model
         'image'
     ];
     public function categories(){
-        return $this->belongsTo(category::class);
+        return $this->belongsTo(category::class, 'category_id', 'id');
     }
-
-    
 }

@@ -24,8 +24,9 @@
                     <div class="logo">
                         <ul>
                             <li>
-                                <a href="/user">dashboard</a>
                                 <a href="/Products" style="color: lightpink;">Product</a>
+                                <a href="/Cart">Cart</a>
+                                <a href="/user">Dashboard</a>
                                 {{-- <a href="/">Category</a>
                                 <a href="/payment">Payment</a> --}}
                             </li>
@@ -33,42 +34,24 @@
                     </div>
                 </nav>
             </section>
-
-            <section>
-                <div class="hello">
-                    <h1><b>Welcome!</b></h1>
-                    <table class="table table-striped table-dark">
-                        <thead>
-                            <tr>
-                                <th scope="col">Category</th>
-                                <th scope="col">Product Name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Total Stock</th>
-                                <th scope="col">Image Title</th>
-                                <th scope="col">Image</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            @foreach ($products as $products)
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" style="width: 150px"
+                        src="{{ asset('/storage/prodImage/' . $products->image) }}">
+                    <div class="card-body">
+                        <h3 class="card-title" style="font-size: 2rem"><b>{{ $products->prodName }}</b></h3>
+                        <p style="color: black; font-size: 1vw">{{ $products->categories->categoryName }}</p>
+                        <p class="card-text">Rp. {{ $products->Price }}</p>
+                        <form action="{{url('addcart', $products->id)}}" method="POST">
                             @csrf
-                            @method('patch')
-                            @foreach ($products as $products)
-                                <tr>
-                                    <td>{{ $products->category_id }}</td>
-                                    <td>{{ $products->prodName }}</td>
-                                    <td>{{ $products->Price }}</td>
-                                    <td>{{ $products->Total }}</td>
-                                    <td>{{ $products->image }}</td>
-                                    <td>
-                                        <div class="card" style="width: 18rem;">
-                                            <img class="card-img-top"
-                                                src="{{ asset('/storage/prodImage/' . $products->image) }}">
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                    </table>
+                            <input type="number" value="1" min="1" class="form-control" style="width: 125px" name="quantity">
+                            <br>
+                            <input type="submit" value="Add Cart" class="addcart">
+                            {{-- <button type="button" value="Add Cart">Add to Cart</button> --}}
+                        </form>
+                    </div>
                 </div>
-            </section>
+            @endforeach
             <div class="container py-5"></div>
             <section class="footer">
                 <div class="sm">

@@ -49,7 +49,7 @@ Route::get('/editProd/{id}', [productCtrl::class, 'editProd'])->name('editProd')
 Route::delete('/deleteProd/{id}', [productCtrl::class, 'deleteProd'])->name('deleteProd')->middleware('isAdmin');
 Route::patch('/updateProd/{id}', [productCtrl::class, 'updateProd'])->name('updateProd')->middleware('isAdmin');
 
-
-//
-// Route::get('/Products', [productCtrl::class, 'userProd']);
+// User UI
 Route::get('/Products', [productCtrl::class, 'userProducts']);
+Route::post('/addcart/{id}', [productCtrl::class, 'addcart']);
+

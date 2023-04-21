@@ -45,7 +45,7 @@ class SessionCtrl extends Controller
         ];
 
         if(Auth::attempt($infoLogin)){
-            return redirect('user')->with("Welcome");
+            return redirect('Products')->with("Welcome");
         }else{
             return redirect('account')->withErrors('Email or Password does not valid');
         }
