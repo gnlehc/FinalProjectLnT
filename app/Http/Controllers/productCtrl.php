@@ -64,10 +64,17 @@ class productCtrl extends Controller
         $products = products::all();
         return view('displayProduct', compact('products'));
     }
+    public function showALL(){
+        $categories = category::all();
+        $products = products::all();
+        return view('displayProduct', compact('products', 'categories'));
+    }
 
     public function editProd($id){
+        // foreign key harus di sertain setiap ada perubahan data atau show data
+        $categories = category::all();
         $products = products::findOrFail($id);
-        return view('editProduct', compact('products'));
+        return view('editProduct', compact('products', 'categories'));
     }
     public function updateProd(Request $request, $id){
         $extension = $request->file('image')->getClientOriginalExtension();

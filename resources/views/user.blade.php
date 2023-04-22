@@ -21,7 +21,8 @@
                         <ul>
                             <li>
                                 <a href="/Products">Product</a>
-                                <a href="/Cart">Cart</a>
+                                <i class="fa fa-shopping-cart text-white"></i>
+                                <a href="/Cart">Cart[{{ $count }}]</a>
                                 <a href="/user" style="color: lightpink;">Dashboard</a>
                                 {{-- <a href="/">Category</a>
                                 <a href="/payment">Payment</a> --}}

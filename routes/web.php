@@ -38,7 +38,8 @@ Route::post('/user', [SessionCtrl::class, 'login']);
 
 Route::get('/user', function () {
     $user = Auth::user();
-    return view('user', compact('user'));
+    $count = Cart::where('user_id', $user->id)->count();
+    return view('user', compact('user', 'count'));
 });
 
 Route::get('/account', [SessionCtrl::class, 'dual'])->middleware('isLogin');
@@ -50,9 +51,9 @@ Route::post('store-product', [productCtrl::class, 'storeProduct']);
 Route::get('/createProduct', [productCtrl::class, 'showCategory'])->name('categories')->middleware('isAdmin');
 Route::get('/displayProduct', [productCtrl::class, 'showProducts']);
 Route::get('/editProd/{id}', [productCtrl::class, 'editProd'])->name('editProd')->middleware('isAdmin');
-Route::delete('/deleteProd/{id}', [productCtrl::class, 'deleteProd'])->name('deleteProd')->middleware('isAdmin');
 Route::patch('/updateProd/{id}', [productCtrl::class, 'updateProd'])->name('updateProd')->middleware('isAdmin');
-
+Route::delete('/deleteProd/{id}', [productCtrl::class, 'deleteProd'])->name('deleteProd')->middleware('isAdmin');
+// Route::get('/displayProduct', [productCtrl::class, 'showALL']);
 // User UI
 // Route::get('/Products', [productCtrl::class, 'userProducts']);
 
