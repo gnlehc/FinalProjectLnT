@@ -40,6 +40,7 @@
                     <table class="table table-striped table-dark">
                         <thead>
                             <tr>
+                                <th scope="col">Category ID</th>
                                 <th scope="col">Category</th>
                                 <th scope="col">Product Name</th>
                                 <th scope="col">Price</th>
@@ -56,6 +57,7 @@
                             @foreach ($products as $products)
                                 <tr>
                                     <td>{{ $products->category_id }}</td>
+                                    <td>{{ $products->categories->categoryName }}</td>
                                     <td>{{ $products->prodName }}</td>
                                     <td>{{ $products->Price }}</td>
                                     <td>{{ $products->Total }}</td>

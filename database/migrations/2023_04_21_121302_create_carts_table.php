@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('prodName')->nullable();
             $table->string('quantity')->nullable();
             $table->string('price')->nullable();
+            $table->unsignedBigInteger('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });
     }

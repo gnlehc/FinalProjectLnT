@@ -38,7 +38,9 @@ class productCtrl extends Controller
 
     public function storeProduct(Request $request){
         $request->validate([
-            'image' => 'required|mimes:jpg,png'
+            'image' => 'required|mimes:jpg,png',
+            'prodName' => 'required|min:5|max:80|string',
+            'Price' => 'required|integer    '
         ]);
 
         $extension = $request->file('image')->getClientOriginalExtension();
@@ -87,23 +89,6 @@ class productCtrl extends Controller
 
     // cart
 
-    public function addcart(Request $request, $id){
-        if(Auth::id()){
-            $user = auth()->user();
-            $product = products::find($id);
-            $cart = new Cart;
-            $cart->user_id = $user->id;
-            $cart->username = $user->Name;
-            $cart->prodName = $product->prodName;
-            $cart->quantity = $request->quantity;
-            $cart->price = $product->Price;
-            $cart->save();
-            return redirect()->back();
-        }
-        // else{
-        //     return redirect('');
-        // }
-    }
 }
 
 

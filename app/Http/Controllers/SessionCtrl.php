@@ -62,7 +62,7 @@ class SessionCtrl extends Controller
         $request->validate([
             'Name' => 'required',
             'Email' => 'required|Email|unique:users',
-            'TLP' => 'required',
+            'TLP' => 'required|unique:users',
             'password' => 'required|min:6',
         ],
         [

@@ -25,7 +25,8 @@
                         <ul>
                             <li>
                                 <a href="/Products" style="color: lightpink;">Product</a>
-                                <a href="/Cart">Cart</a>
+                                <i class="fa fa-shopping-cart text-white"></i>
+                                <a href="/Cart">Cart[{{ $count }}]</a>
                                 <a href="/user">Dashboard</a>
                                 {{-- <a href="/">Category</a>
                                 <a href="/payment">Payment</a> --}}
@@ -34,24 +35,36 @@
                     </div>
                 </nav>
             </section>
-            @foreach ($products as $products)
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" style="width: 150px"
-                        src="{{ asset('/storage/prodImage/' . $products->image) }}">
-                    <div class="card-body">
-                        <h3 class="card-title" style="font-size: 2rem"><b>{{ $products->prodName }}</b></h3>
-                        <p style="color: black; font-size: 1vw">{{ $products->categories->categoryName }}</p>
-                        <p class="card-text">Rp. {{ $products->Price }}</p>
-                        <form action="{{url('addcart', $products->id)}}" method="POST">
-                            @csrf
-                            <input type="number" value="1" min="1" class="form-control" style="width: 125px" name="quantity">
-                            <br>
-                            <input type="submit" value="Add Cart" class="addcart">
-                            {{-- <button type="button" value="Add Cart">Add to Cart</button> --}}
-                        </form>
-                    </div>
+            @if (session()->has('message'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">X</button>
+                    {{ session()->get('message') }}
                 </div>
-            @endforeach
+            @endif
+            <div class="grid grid-rows-3 grid-flow-col gap-4 rounded bg-white" style="width: 18rem;">
+                @foreach ($products as $products)
+                    <br>
+                    <br>
+                    <div>
+                        <img class="rounded py-2 px-2 grid grid-rows-3 grid-flow-col gap-4" style="width: 150px"
+                            src="{{ asset('/storage/prodImage/' . $products->image) }}">
+                        <div class="py-2 px-2 rounded shadow-lg">
+                            <h3 class="card-title" style="font-size: 2rem"><b>{{ $products->prodName }}</b></h3>
+                            <p style="color: black; font-size: 1vw">{{ $products->categories->categoryName }}</p>
+                            <p class="card-text">Rp. {{ $products->Price }}</p>
+                            <form action="{{ url('addcart', $products->id) }}" method="POST">
+                                @csrf
+                                <input type="number" value="1" min="1" class="form-control"
+                                    style="width: 125px" name="quantity">
+                                <br>
+                                <input type="submit" value="Add Cart" class="addcart">
+                                {{-- <button type="button" value="Add Cart">Add to Cart</button> --}}
+                            </form>
+                        </div>
+
+                    </div>
+                @endforeach
+            </div>
             <div class="container py-5"></div>
             <section class="footer">
                 <div class="sm">
