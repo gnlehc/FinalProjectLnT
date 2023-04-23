@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\MessageBag;
+use Validator;
 class SessionCtrl extends Controller
 {
     public function home(){
@@ -30,13 +32,19 @@ class SessionCtrl extends Controller
     }
     function login(Request $request){
         Session::flash('Email', $request->Email);
+        // $errors = new MessageBag;
         $request->validate([
-            'Email' => 'required',
-            'password' => 'required',
+            'Email' => 'required|exists:Users,Email|ends_with:@gmail.com',
+            'password' => 'required|min:6|max:12',
+            // 'password' => 'required|min:6|max:12|confirmed',
         ],
         [
             'Email.required' => 'Email cannot be empty',
             'password.required' => 'Password cannot be empty',
+            'password.min' => 'Password must be atleast 6 char',
+            'password.max' => 'Password maximum 12 char',
+            'Email.exists' => 'There is no Account with this Email',
+            'password.confirmed' => 'Email or Password Invalid',
         ]);
 
         $infoLogin = [
@@ -47,6 +55,7 @@ class SessionCtrl extends Controller
         if(Auth::attempt($infoLogin)){
             return redirect('Products')->with("Welcome");
         }else{
+            // $errors = new MessageBag(['password' => ['Email Or Password Invalid']]);
             return redirect('account')->withErrors('Email or Password does not valid');
         }
     }
@@ -60,17 +69,22 @@ class SessionCtrl extends Controller
         Session::flash('Name', $request->Name);
         Session::flash('Email', $request->Email);
         $request->validate([
-            'Name' => 'required',
-            'Email' => 'required|Email|unique:users',
-            'TLP' => 'required|unique:users',
-            'password' => 'required|min:6',
+            'Name' => 'required|min:3|max:40',
+            'Email' => 'required|Email|unique:users|ends_with:@gmail.com',
+            'TLP' => 'required|unique:users|starts_with:0,8',
+            'password' => 'required|min:6|max:12|confirmed',
         ],
         [
             'Name.required' => 'Name cannot be empty',
+            'Name.min' => 'Name must be atleast 3 char',
+            'Name.max' => 'Name maximum length 40 char',
             'Email.required' => 'Email cannot be empty',
             'Email.Email' => "Enter Valid Email",
-            'Email.unique' => "Email are already been taken",
+            'Email.unique' => "Email are already been registered",
             'password.required' => 'Password cannot be empty',
+            'TLP.starts_with' => 'Telephone Number Must Be Starts With 08',
+            'password.min' => 'Password must be atleast 6 char',
+            'password.max' => 'Password maximum 12 char',
         ]);
 
         $account = [
@@ -84,11 +98,15 @@ class SessionCtrl extends Controller
             'Email' => $request->Email,
             'password' => $request->password
         ];
+
         if(Auth::attempt($infoLogin)){
             return redirect('account')->with("Welcome", Auth::user()-> Name);
         }else{
             return redirect('register')->withErrors('Email or Password does not valid');
         }
+        // if ($infoLogin && !\Hash::check($request->password, $infoLogin->password)) {
+        //     $errors = ['password' => 'Wrong password'];
+        // }
     }
     public function showData(){
         $users = User::all();

@@ -28,10 +28,12 @@
                                                 <div class="form-group">
                                                     <input type="email" class="form-style" placeholder="Email" name="Email" value="{{Session::get('Email')}}">
                                                     <i class="input-icon uil uil-at"></i>
-                                                </div>	
+                                                    <div class="alert-danger">{{$errors->first('Email')}}</div>
+                                                </div>
                                                 <div class="form-group mt-2">
                                                     <input type="password" class="form-style" placeholder="Password" name="password">
                                                     <i class="input-icon uil uil-lock-alt"></i>
+                                                    <div class="alert-danger">{{$errors->first('password')}}</div>
                                                 </div>
                                                 <div class="mb-4 pb-3"></div>
                                                 <div id="submit">
@@ -50,18 +52,22 @@
                                                 <div class="form-group">
                                                     <input type="text" class="form-style" placeholder="Full Name" name="Name" value="{{Session::get('Name')}}">
                                                     <i class="input-icon uil uil-user"></i>
-                                                </div>	
+                                                    <div class="alert-danger">{{$errors->first('Name')}}</div>
+                                                </div>
                                                 <div class="form-group mt-2">
                                                     <input type="email" class="form-style" placeholder="Email" name="Email" value="{{Session::get('Email')}}">
                                                     <i class="input-icon uil uil-at"></i>
+                                                    <div class="alert-danger">{{$errors->first('Email')}}</div>
                                                 </div>
                                                 <div class="form-group mt-2">
                                                     <input type="tel" class="form-style" placeholder="Phone Number" name="TLP" value="{{Session::get('TLP')}}">
                                                     <i class="input-icon uil uil-phone"></i>
-                                                </div>	
+                                                    <div class="alert-danger">{{$errors->first('TLP')}}</div>
+                                                </div>
                                                 <div class="form-group mt-2">
                                                     <input type="password" class="form-style" placeholder="Password" name="password">
                                                     <i class="input-icon uil uil-lock-alt"></i>
+                                                    <div class="alert-danger">{{$errors->first('password')}}</div>
                                                 </div>
                                                 <div class="mb-2 pb-3"></div>
                                                 <div id="submit">
