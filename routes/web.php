@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartCtrl;
+use App\Http\Controllers\OrderCtrl;
 use App\Http\Controllers\productCtrl;
 use App\Http\Controllers\SessionCtrl;
 use App\Models\Cart;
@@ -47,7 +48,6 @@ Route::get('/account', [SessionCtrl::class, 'dual'])->middleware('isLogin');
 Route::post('/store-category', [productCtrl::class, 'storeCategory']);
 Route::post('store-product', [productCtrl::class, 'storeProduct']);
 // Route::get('/createProduct', [productCtrl::class, 'showCategory'])->name('categories')->middleware('isAdmin');
-Route::get('/displayProduct', [productCtrl::class, 'showProducts']);
 // Route::get('/editProd/{id}', [productCtrl::class, 'editProd'])->name('editProd')->middleware('isAdmin');
 // Route::patch('/updateProd/{id}', [productCtrl::class, 'updateProd'])->name('updateProd')->middleware('isAdmin');
 // Route::delete('/deleteProd/{id}', [productCtrl::class, 'deleteProd'])->name('deleteProd')->middleware('isAdmin');
@@ -58,6 +58,7 @@ Route::get('/displayProduct', [productCtrl::class, 'showProducts']);
 
 Route::middleware(['isAdmin'])->group(function () {
     // show (CRUD) product data from database
+    Route::get('/displayProduct', [productCtrl::class, 'showProducts']);
     Route::get('/createCategory', [productCtrl::class, 'indexCategory']);
     Route::get('/createProduct', [productCtrl::class, 'showCategory'])->name('categories');
     Route::get('/editProd/{id}', [productCtrl::class, 'editProd'])->name('editProd');
@@ -94,3 +95,8 @@ Route::get('/Cart', [CartCtrl::class, 'showCart']);
 // });
 
 Route::get('/delete/{id}', [CartCtrl::class, 'deleteCart']);
+
+// order faktur page
+Route::get('/order', [OrderCtrl::class, 'indexOrder']);
+// Route::post('/store-shipping', [OrderCtrl::class, 'Order']);
+Route::post('/user', [OrderCtrl::class, 'makeOrder']);

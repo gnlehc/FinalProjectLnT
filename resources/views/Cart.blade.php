@@ -128,7 +128,7 @@
                                     <dt>Total Items: {{ $items }}</dt>
                                     {{-- <dd class="text-right text-dark b ml-3"><strong>$59.97</strong></dd> --}}
                                 </dl>
-                                <hr> <a href="#" class="btn btn-out btn-primary btn-square btn-main"
+                                <hr> <a href="/order" class="btn btn-out btn-primary btn-square btn-main"
                                     data-abc="true">
                                     Make Purchase </a> <a href="/Products"
                                     class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue

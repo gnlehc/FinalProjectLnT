@@ -16,7 +16,8 @@ class isAdmin
     public function handle(Request $request, Closure $next): Response
     {
         if(!auth()->check() || !auth()->user()->isAdmin){
-            abort(403);
+            // abort(403);
+            return redirect('/Products');
         }
         return $next($request);
     }

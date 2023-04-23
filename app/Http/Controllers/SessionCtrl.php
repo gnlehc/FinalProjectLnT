@@ -72,7 +72,7 @@ class SessionCtrl extends Controller
             'Name' => 'required|min:3|max:40',
             'Email' => 'required|Email|unique:users|ends_with:@gmail.com',
             'TLP' => 'required|unique:users|starts_with:0,8',
-            'password' => 'required|min:6|max:12|confirmed',
+            'password' => 'required|min:6|max:12',
         ],
         [
             'Name.required' => 'Name cannot be empty',
