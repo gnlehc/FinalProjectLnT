@@ -23,7 +23,7 @@
                                 <a href="/Products">Product</a>
                                 <i class="fa fa-shopping-cart text-white"></i>
                                 <a href="/Cart">Cart[{{ $count }}]</a>
-                                <a href="/user" style="color: lightpink;">Dashboard</a>
+                                <a href="/user" style="color: lightpink;">Profile</a>
                                 {{-- <a href="/">Category</a>
                                 <a href="/payment">Payment</a> --}}
                                 <button type="button" onclick="location.href='{{ route('logout') }}'">LogOut</button>

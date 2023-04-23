@@ -27,7 +27,7 @@
                                 <a href="/Products" style="color: lightpink;">Product</a>
                                 <i class="fa fa-shopping-cart text-white"></i>
                                 <a href="/Cart">Cart[{{ $count }}]</a>
-                                <a href="/user">Dashboard</a>
+                                <a href="/user">Profile</a>
                                 {{-- <a href="/">Category</a>
                                 <a href="/payment">Payment</a> --}}
                             </li>

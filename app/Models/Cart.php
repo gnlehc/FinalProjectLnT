@@ -19,4 +19,10 @@ class Cart extends Model
     public function products(){
         return $this->belongsTo(products::class, 'product_id', 'id');
     }
+    // public function user(){
+    //     return $this->belongsTo(User::class, 'user_id');
+    // }
+    // public function product(){
+    //     return $this->hasMany(products::class, 'product_id', 'id');
+    // }
 }

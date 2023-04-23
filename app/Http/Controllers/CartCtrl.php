@@ -42,7 +42,7 @@ class CartCtrl extends Controller
 
     public function showCart(){
         $user = auth()->user();
-        $carts = Cart::all();
+        $carts = Cart::where('user_id', $user->id)->get(); // each user has their own cart
         $count = Cart::where('user_id', $user->id)->count();
         return view('Cart', compact('user', 'count', 'carts'));
     }

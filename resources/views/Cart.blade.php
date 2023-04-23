@@ -28,7 +28,7 @@
                                 <a href="/Products">Product</a>
                                 <i class="fa fa-shopping-cart text-white"></i>
                                 <a href="/Cart" style="color: lightpink;">Cart[{{ $count }}]</a>
-                                <a href="/user">Dashboard</a>
+                                <a href="/user">Profile</a>
                                 {{-- <a href="/">Category</a>
                         <a href="/payment">Payment</a> --}}
                             </li>
@@ -130,7 +130,7 @@
                                 </dl>
                                 <hr> <a href="#" class="btn btn-out btn-primary btn-square btn-main"
                                     data-abc="true">
-                                    Make Purchase </a> <a href="#"
+                                    Make Purchase </a> <a href="/Products"
                                     class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue
                                     Shopping</a>
                             </div>
