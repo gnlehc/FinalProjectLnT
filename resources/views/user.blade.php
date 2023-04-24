@@ -23,9 +23,6 @@
                                 <a href="/Products">Product</a>
                                 <i class="fa fa-shopping-cart"></i>
                                 <a href="/Cart">Cart[{{ $count }}]</a>
-                                {{-- <a href="/">Category</a>
-                                <a href="/payment">Payment</a> --}}
-                                <button type="button" onclick="location.href='{{ route('logout') }}'">LogOut</button>
                             </li>
                         </ul>
                     </div>
@@ -33,15 +30,15 @@
             </section>
 
             <div class="p-10" style="color: lightcoral">
-                {{ __("Hello, $user->Name!") }}
+                {{ __("Hello, $order->Name!") }}
             </div>
             @php
                 $total = 0;
                 $items = 0;
             @endphp
-            @foreach ($carts as $cart)
+            @foreach ($checkout as $cart)
                 @php
-                    $total += $cart->products->Price * $cart->quantity;
+                    $total += $cart->price * $cart->quantity;
                     $items += $cart->quantity;
                 @endphp
             @endforeach
@@ -52,26 +49,33 @@
                         <p class="my-5 mx-5" style="font-size: 30px;"><b>Thank for your purchase</b></p>
                         <div class="row">
                             <ul class="list-unstyled">
-                                <li>{{ $order->Name }}</li>
-                                <li class="text-muted mt-1"><span>Invoice</span> #{{ $order->payment_id }}</li>
-                                <li class="mt-1">April 17 2021</li>
+                                <li>{{ $order->Name }}!</li>
+                                <li class="text-muted mt-1"><span>Invoice</span> #{{ $order->shipping_id }}</li>
                             </ul>
-                            @foreach ($carts as $cart)
-                                <hr>
-                                <div class="col-xl-10">
-                                    <p>{{ $cart->prodName }}</p>
+                            <hr>
+                            <div class="col-xl-10">
+                                <p>{{ $order->posCode }}</p>
+                            </div>
+                            <div class="col-xl-10">
+                                <p>{{ $order->address }}</p>
+                            </div>
+                            @foreach ($order->ordered_items as $item)
+                                <div class="hero container max-w-screen-lg mx-auto pb-10">
+                                    <img class="mx-auto" style="width: 10rem; margin: auto;"
+                                        src="{{ asset('/storage/prodImage/' . $item->products->image) }}">
                                 </div>
                                 <div class="col-xl-2">
-                                    <p class="float-end">Price: Rp. {{ $cart->price }}
+                                    <p class="float-end">{{ $item->products->prodName }} Price: Rp. {{ $item->price }}
+                                        / each
                                     </p>
                                     <hr style="width: 40%">
-                                    <p class="float-end">Qty: {{ $cart->quantity }}
+                                    <p class="float-end">Quantity: {{ $item->quantity }}
                                     </p>
                                 </div>
-                                <hr>
                             @endforeach
+                            <hr>
                             <div class="col-xl-12">
-                                <p class="float-end fw-bold">Total: Rp. {{$total}}
+                                <p class="float-end fw-bold">Total Price: Rp. {{ $total }}
                                 </p>
                             </div>
                             <hr style="border: 2px solid;">

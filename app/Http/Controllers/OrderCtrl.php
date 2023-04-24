@@ -41,19 +41,19 @@ class OrderCtrl extends Controller
 
     // }
 
-    private function generateOrderToken()
-    {
-        return Str::random(6);
-    }
+    // private function generateOrderToken()
+    // {
+    //     return Str::random(6);
+    // }
 
     // $cartitems = Cart::where('user_id', Auth::id())->get();
     // foreach()
 
-    public function index(){
+    public function index()
+    {
         $old_cartItems = Cart::where('user_id', Auth::id())->get();
-        foreach($old_cartItems as $items){
-            if(!products::where('id', $items->product_id)->where('Total', '>=', $items->quantity)->exists())
-            {
+        foreach ($old_cartItems as $items) {
+            if (!products::where('id', $items->product_id)->where('Total', '>=', $items->quantity)->exists()) {
                 $removeItem = Cart::where('user_id', Auth::id())->where('product_id', $items->product_id)->first();
                 $removeItem->delete();
             }
@@ -62,7 +62,9 @@ class OrderCtrl extends Controller
         return view('Order', compact('cartItems'));
     }
 
-    public function makeOrder(Request $request){
+    public function makeOrder(Request $request)
+    {
+        $user = Auth::id();
         $order = new Order();
         $order->Name = $request->Name;
         $order->address = $request->address;
@@ -75,7 +77,7 @@ class OrderCtrl extends Controller
         $order->id;
 
         $cartitems = Cart::where('user_id', Auth::id())->get();
-        foreach($cartitems as $items){
+        foreach ($cartitems as $items) {
             OrderItems::create([
                 'order_id' => $order->id,
                 'product_id' => $items->product_id,
@@ -86,14 +88,22 @@ class OrderCtrl extends Controller
             $prod = products::where('id', $items->product_id)->first();
             $prod->Total -= $items->quantity;
             $prod->update();
-            $checkout = OrderItems::where('product_id', $items->product_id)->first();
-            $items->quantity -= $checkout->quantity;
-            $items->update();
-            // if($items->quantity == 0){
-            //     $items->delete();
-            // }
+            // Remove item from cart if its quantity has been checked out
+            $items->quantity -= $items->quantity;
+            $items->delete();
         }
-        return redirect('/Products');
+        $checkout = OrderItems::where('order_id', $order->id)->get();
+        // $ordered_items = OrderItems::where('order_id', $order->id)->get();
+        $count = Cart::where('user_id', $user)->count();
+        return view('/user', compact('order', 'user', 'cartitems', 'count', 'checkout'));
+    }
+
+    public function showOrderDetail($orderId){
+        $ordered_items = Order::find($orderId);
+
+        return view('user', [
+            'order' => $ordered_items,
+        ]);
     }
 
 }

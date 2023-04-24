@@ -19,9 +19,9 @@ return new class extends Migration
             // $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
             // $table->string('payment_id')->nullable();
             $table->string('shipping_id')->nullable();
-            $table->string('Name');
-            $table->text('address');
-            $table->string('posCode');
+            $table->string('Name')->nullable();
+            $table->text('address')->nullable();
+            $table->string('posCode')->nullable();
             $table->timestamps();
         });
     }

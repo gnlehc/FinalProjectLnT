@@ -15,7 +15,9 @@ class CartCtrl extends Controller
             $user = auth()->user();
             $product = products::find($id);
             $cart = Cart::where('user_id', $user->id)->where('product_id', $id)->first();
-
+            if ((int) $product->Total <= 0) {
+                return back()->withInput()->withErrors(['quantity' => 'This Product is Out Of Stock']);
+            }
             if ($cart) {
                 if ($cart->quantity >= $product->Total) {
                     return back()->withInput()->withErrors(['quantity' => 'There isnt enough stock']);

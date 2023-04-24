@@ -150,3 +150,21 @@ button{
     padding: 5px 1.5rem 5px 1.5rem;
     color: whitesmoke;
 }
+
+.card{
+    float: left;
+    width: 33.33%;
+    margin:10px;
+    box-shadow: 2px 8px 8px 8px rgba(0,0,0,0.2);
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+table{
+    padding-right: 30px;
+    padding-left: 30px;
+
+}

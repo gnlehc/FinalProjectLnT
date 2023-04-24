@@ -6,6 +6,7 @@ use App\Http\Controllers\productCtrl;
 use App\Http\Controllers\SessionCtrl;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderItems;
 use App\Models\products;
 use Illuminate\Support\Facades\Route;
 
@@ -104,4 +105,9 @@ Route::get('/delete/{id}', [CartCtrl::class, 'deleteCart']);
 
 Route::get('/order', [OrderCtrl::class, 'indexOrder']);
 Route::post('/store-shipping', [OrderCtrl::class, 'makeOrder']);
-// Route::post('/user', [OrderCtrl::class, 'makeOrder']);
+// Route::get('/user', [SessionCtrl::class, 'indexUser']);
+
+
+
+Route::get('/user', [OrderCtrl::class, 'makeOrder']);
+// Route::get('/user', [OrderCtrl::class, 'showOrderDetail']);

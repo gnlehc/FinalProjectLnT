@@ -30,6 +30,9 @@ class User extends Authenticatable
     public function orders(){
         return $this->hasMany(Order::class);
     }
+    public function ordered_items(){
+        return $this->hasMany(OrderItems::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
