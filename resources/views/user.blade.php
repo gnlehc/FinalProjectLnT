@@ -68,6 +68,7 @@
                                     <p class="float-end">{{ $item->products->prodName }} Price: Rp. {{ $item->price }}
                                         / each
                                     </p>
+                                    <p class="float-end">Category: {{$item->products->categories->categoryName}}</p>
                                     <hr style="width: 40%">
                                     <p class="float-end">Quantity: {{ $item->quantity }}
                                     </p>
