@@ -20,7 +20,7 @@
         @if (Auth::check())
             <div class="pay">
                 <h2>Shipping</h2>
-                <form id="payment" action="/user" method="POST">
+                <form id="payment" action="/store-shipping" method="POST">
                     @csrf
                     <div class="inputname">
                         <div class="input_box">

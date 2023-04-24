@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable()->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('cart_id')->nullable()->unsigned();
-            $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
-            $table->string('payment_id')->nullable();
+            // $table->unsignedBigInteger('cart_id')->nullable()->unsigned();
+            // $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
+            // $table->string('payment_id')->nullable();
+            $table->string('shipping_id')->nullable();
             $table->string('Name');
             $table->text('address');
             $table->string('posCode');

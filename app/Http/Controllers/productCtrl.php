@@ -67,6 +67,7 @@ class productCtrl extends Controller
     public function showALL(){
         $categories = category::all();
         $products = products::all();
+        // $cart = Cart::where('user_id', Auth::id())->get();
         return view('displayProduct', compact('products', 'categories'));
     }
 

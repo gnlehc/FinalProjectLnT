@@ -23,7 +23,7 @@
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Log In</h4>
-                                            <form action="/user" method="POST">
+                                            <form action="/Products" method="POST">
                                                 @csrf
                                                 <div class="form-group">
                                                     <input type="email" class="form-style" placeholder="Email" name="Email" value="{{Session::get('Email')}}">

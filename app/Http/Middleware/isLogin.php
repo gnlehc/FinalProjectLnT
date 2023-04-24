@@ -16,7 +16,7 @@ class isLogin
     public function handle(Request $request, Closure $next): Response
     {
         if(auth()->check()){
-            return redirect('/user');
+            return redirect('/Products');
         }
         return $next($request);
     }

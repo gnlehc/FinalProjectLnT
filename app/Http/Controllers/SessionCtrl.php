@@ -17,9 +17,6 @@ class SessionCtrl extends Controller
     public function dashboard(){
         return view('dashboard');
     }
-    public function indexRegist(){
-        return view('register');
-    }
     public function indexLogin(){
         return view('login');
     }
@@ -101,8 +98,6 @@ class SessionCtrl extends Controller
 
         if(Auth::attempt($infoLogin)){
             return redirect('account')->with("Welcome", Auth::user()-> Name);
-        }else{
-            return redirect('register')->withErrors('Email or Password does not valid');
         }
         // if ($infoLogin && !\Hash::check($request->password, $infoLogin->password)) {
         //     $errors = ['password' => 'Wrong password'];

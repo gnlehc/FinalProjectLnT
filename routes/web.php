@@ -5,6 +5,7 @@ use App\Http\Controllers\OrderCtrl;
 use App\Http\Controllers\productCtrl;
 use App\Http\Controllers\SessionCtrl;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\products;
 use Illuminate\Support\Facades\Route;
 
@@ -33,14 +34,9 @@ Route::get('/logout', [SessionCtrl::class, 'logout'])->name('logout');
 // Route::delete('/delete/{id}', [SessionCtrl::class, 'delete'])->name('delete')->middleware('isAdmin');
 // Route::patch('/updateData/{id}', [SessionCtrl::class, 'update'])->name('update')->middleware('isAdmin');
 
-Route::get('/user', [SessionCtrl::class, 'indexUser']);
-Route::post('/user', [SessionCtrl::class, 'login']);
+Route::get('/Products', [SessionCtrl::class, 'indexUser']);
+Route::post('/Products', [SessionCtrl::class, 'login']);
 
-Route::get('/user', function () {
-    $user = Auth::user();
-    $count = Cart::where('user_id', $user->id)->count();
-    return view('user', compact('user', 'count'));
-});
 
 Route::get('/account', [SessionCtrl::class, 'dual'])->middleware('isLogin');
 
@@ -81,6 +77,7 @@ Route::get('/Products', function () {
     $products = products::all();
     $count = Cart::where('user_id', $user->id)->count();
     $cart = new Cart;
+    // $cart = Cart::where('user_id', $user->id)->get();
     return view('Product', compact('user', 'count', 'products', 'cart'));
 });
 
@@ -97,6 +94,14 @@ Route::get('/Cart', [CartCtrl::class, 'showCart']);
 Route::get('/delete/{id}', [CartCtrl::class, 'deleteCart']);
 
 // order faktur page
+// Route::get('/user', function () {
+//     $user = Auth::user();
+//     $count = Cart::where('user_id', $user->id)->count();
+//     $carts = Cart::where('user_id', $user->id)->get();
+//     $order = Order::all();
+//     return view('user', compact('user', 'count', 'order', 'carts'));
+// });
+
 Route::get('/order', [OrderCtrl::class, 'indexOrder']);
-// Route::post('/store-shipping', [OrderCtrl::class, 'Order']);
-Route::post('/user', [OrderCtrl::class, 'makeOrder']);
+Route::post('/store-shipping', [OrderCtrl::class, 'makeOrder']);
+// Route::post('/user', [OrderCtrl::class, 'makeOrder']);

@@ -9,9 +9,10 @@
     display: inline-block;
 }
 body{
-    background-image: linear-gradient(rgba(100, 100, 100, 0.1),
+    /* background-image: linear-gradient(rgba(100, 100, 100, 0.1),
     rgba(100, 100, 100, 0.1)),
-    url("../css/asset/colorpurple.jpg");
+    url("../css/asset/colorpurple.jpg"); */
+    background-color: linen;
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -29,15 +30,6 @@ nav {
     width: 100%;
 }
 
-.logo ul li a {
-    color: whitesmoke;
-    text-decoration: none;
-    font-size: 2vh;
-    list-style: none;
-    display: inline-block;
-    padding: 4px 16px;
-    font-size: 1.1vw;
-}
 
 .logo ul li {
     position: relative;
@@ -51,7 +43,7 @@ nav {
     content: "";
     width: 0%;
     height: 2px;
-    background: pink;
+    background: lightcoral;
     display: block;
     margin: auto;
     transition: 0.5s;
@@ -60,25 +52,9 @@ nav {
     width: 100%;
 }
 
-h1{
-    font-size: 5vw;
-    color: whitesmoke;
-    text-align: center;
-    padding-top: 10vw;
-    padding-bottom: 2vw;
-}
-h4{
-    color: whitesmoke;
-}
-h2{
-    color: whitesmoke;
-}
-table{
-    text-align: center;
-}
 
 .logo ul li a{
-    color: whitesmoke;
+    color: lightcoral;
     text-decoration: none;
     font-size: 2vh;
     list-style: none;
@@ -120,13 +96,11 @@ table{
     list-style: none;
     padding: 4px 16px;
     font-size: 20px;
-    color: whitesmoke;
-    text-shadow: 1px 1px black;
+    color: lightcoral;
 }
 .footer p{
     padding-top: 1vh;
-    color: whitesmoke;
-    text-shadow: 1px 1px black;
+    color: lightcoral;
     font-size: small;
 }
 
@@ -140,6 +114,34 @@ button{
     background-color: palevioletred;
     color: whitesmoke;
 }
+
+.container p{
+    color: white;
+    text-align: center;
+    padding: 5px;
+}
+.row ul li{
+    list-style: none;
+    color: white;
+    text-align: center;
+    padding: 5px;
+}
+
+hr{
+    color: white;
+    width: 80%;
+    margin: auto;
+}
+.card{
+    background-color: palevioletred;
+    border-radius: 1rem;
+    width: 45%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin: auto;
+    box-shadow: 2px 8px 8px 8px rgba(0,0,0,0.2);
+}
+
 
 
 

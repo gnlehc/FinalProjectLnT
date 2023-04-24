@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderItems;
 use App\Models\products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,33 +16,84 @@ class OrderCtrl extends Controller
     {
         return view('Order');
     }
-    public function makeOrder(Request $request)
-    {
-        $user = auth()->user();
-        $user = Auth::user();
-        $carts = Cart::where('user_id', $user->id)->get();
-        $count = Cart::where('user_id', $user->id)->count();
+    // public function makeOrder(Request $request)
+    // {
+    //     $user = auth()->user();
+    //     $user = Auth::user();
+    //     $carts = Cart::where('user_id', $user->id)->get();
+    //     $count = Cart::where('user_id', $user->id)->count();
 
-        $order = new Order;
-        $order->Name = $request->Name;
-        $order->address = $request->address;
-        $order->posCode = $request->posCode;
+    //     $order = new Order;
+    //     $order->Name = $request->Name;
+    //     $order->address = $request->address;
+    //     $order->posCode = $request->posCode;
 
-        // generate a random 8-character token and check if it's unique
-        do {
-            $payment_id = Str::random(8);
-        } while (Order::where('payment_id', $payment_id)->exists());
+    //     // generate a random 8-character token and check if it's unique
+    //     do {
+    //         $payment_id = Str::random(12);
+    //     } while (Order::where('payment_id', $payment_id)->exists());
 
-        $order->payment_id = $payment_id;
+    //     $order->payment_id = $payment_id;
 
-        $order->save();
+    //     $order->save();
 
-        return view('user', compact('order', 'user', 'carts', 'count'));
+    //     return view('user', compact('order', 'user', 'carts', 'count'));
 
-    }
+    // }
 
     private function generateOrderToken()
     {
         return Str::random(6);
     }
+
+    // $cartitems = Cart::where('user_id', Auth::id())->get();
+    // foreach()
+
+    public function index(){
+        $old_cartItems = Cart::where('user_id', Auth::id())->get();
+        foreach($old_cartItems as $items){
+            if(!products::where('id', $items->product_id)->where('Total', '>=', $items->quantity)->exists())
+            {
+                $removeItem = Cart::where('user_id', Auth::id())->where('product_id', $items->product_id)->first();
+                $removeItem->delete();
+            }
+        }
+        $cartItems = Cart::where('user_id', Auth::id())->get();
+        return view('Order', compact('cartItems'));
+    }
+
+    public function makeOrder(Request $request){
+        $order = new Order();
+        $order->Name = $request->Name;
+        $order->address = $request->address;
+        $order->posCode = $request->posCode;
+        do {
+            $shipping_id = Str::random(12);
+        } while (Order::where('shipping_id', $shipping_id)->exists());
+        $order->shipping_id = $shipping_id;
+        $order->save();
+        $order->id;
+
+        $cartitems = Cart::where('user_id', Auth::id())->get();
+        foreach($cartitems as $items){
+            OrderItems::create([
+                'order_id' => $order->id,
+                'product_id' => $items->product_id,
+                'quantity' => $items->quantity,
+                'price' => $items->products->Price,
+            ]);
+
+            $prod = products::where('id', $items->product_id)->first();
+            $prod->Total -= $items->quantity;
+            $prod->update();
+            $checkout = OrderItems::where('product_id', $items->product_id)->first();
+            $items->quantity -= $checkout->quantity;
+            $items->update();
+            // if($items->quantity == 0){
+            //     $items->delete();
+            // }
+        }
+        return redirect('/Products');
+    }
+
 }
