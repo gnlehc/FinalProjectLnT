@@ -5,8 +5,6 @@ use App\Http\Controllers\OrderCtrl;
 use App\Http\Controllers\productCtrl;
 use App\Http\Controllers\SessionCtrl;
 use App\Models\Cart;
-use App\Models\Order;
-use App\Models\OrderItems;
 use App\Models\products;
 use Illuminate\Support\Facades\Route;
 

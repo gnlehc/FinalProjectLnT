@@ -12,6 +12,7 @@ return new class extends Migration
     protected $table = 'orders';
     public function up(): void
     {
+        // nama migrasi yang ada spasi bs pake snake case jangan pake camel case
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id')->nullable()->unsigned();
