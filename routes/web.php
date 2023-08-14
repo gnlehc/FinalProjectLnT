@@ -6,6 +6,7 @@ use App\Http\Controllers\productCtrl;
 use App\Http\Controllers\SessionCtrl;
 use App\Models\Cart;
 use App\Models\products;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
